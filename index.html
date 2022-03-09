@@ -7,12 +7,13 @@
 <body>
 
 <h1>Accessing Car info with JSON</h1>
+<h3>See how long a certain make of car is...</h3>
 
-<label>Enter a name:
+<label>Enter a brand of car:
     <input type="text" id="search">
 </label>
 
-<button id="get">Get JSON data</button>
+<button id="get">Get length!</button>
 
 <div id="output"></div>
 
@@ -24,13 +25,14 @@
         //get search term and convert to lowercase
         let search = $("#search").val().toLowerCase();
 
-        $.getJSON("studentsV2.json", function(result) {
+        $.getJSON("cars.json", function(result) {
             $.each(result, function(index, item){
 
-                //if last name includes the search term
-                if(item.name.last.toLowerCase().includes(search))
+                //if mpg matches the search term
+                if(item.Identification.Make.toLowerCase().includes(search))
                 {
-                    $("#output").html(item.name.first + " " + item.name.last + ", " + item.gpa + "<br>");
+                    $("#output").html("<br>" + "a " + item.Identification.ID + " is " +
+                        item.Dimensions.Length + " inches long!" + "<br>");
                 }
             });
         });
