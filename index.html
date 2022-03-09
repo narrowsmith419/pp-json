@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Accessing Car Info with JSON</title>
+</head>
+<body>
+
+<h1>Accessing Car info with JSON</h1>
+
+<label>Enter a name:
+    <input type="text" id="search">
+</label>
+
+<button id="get">Get JSON data</button>
+
+<div id="output"></div>
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script>
+    //search when user presses key in the text box
+    $("#search").on("keyup",function()
+    {
+        //get search term and convert to lowercase
+        let search = $("#search").val().toLowerCase();
+
+        $.getJSON("studentsV2.json", function(result) {
+            $.each(result, function(index, item){
+
+                //if last name includes the search term
+                if(item.name.last.toLowerCase().includes(search))
+                {
+                    $("#output").html(item.name.first + " " + item.name.last + ", " + item.gpa + "<br>");
+                }
+            });
+        });
+    });
+
+</script>
+</body>
+</html>
